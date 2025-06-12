@@ -23,7 +23,9 @@ class Calculator {
   }
 
   subtract(x = this.x, y = this.y) {
-    
+    x = this.parseInput(x);
+    y = this.parseInput(y);
+    return x - y
   }
 
   divide(x = this.x, y = this.y) {
