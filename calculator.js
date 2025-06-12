@@ -29,7 +29,9 @@ class Calculator {
   }
 
   divide(x = this.x, y = this.y) {
-    
+    x = this.parseInput(x);
+    y = this.parseInput(y);
+    return x / y;
   }
 
   multiply(x = this.x, y = this.y) {

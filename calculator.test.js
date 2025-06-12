@@ -75,6 +75,9 @@ describe('calculator', () => {
         }
       );
 
+      test('string not number', () => {
+        expect(() => calculator.subtract('string', 'string2')).toThrow();
+      });
     });
 
     describe('subtraction cases', () => {
@@ -84,10 +87,47 @@ describe('calculator', () => {
           expect(calculator.subtract(x, y)).toBe(expected)
          }
       )
+    })
+  });
+
+  describe('divide', () => {
+    const divisionCases = [
+      [10, 2, 5],
+      [9, 3, 3],
+      [7, 2, 3.5],
+      [0, 5, 0],
+      [-10, 2, -5],
+      [10, -2, -5],
+      [-10, -2, 5],
+      [1.5, 0.5, 3],
+      ['10', 2, 5],         // string numérica
+      [10, '2', 5],         // string numérica
+      ['6', '3', 2],        // ambas como string numérica
+      [0, 0.5, 0],
+      [0.5, 0.25, 2],
+      [1000, 10, 100],
+    ];
+
+    describe('error cases', () => {
+      test.each(invalidCombinations)(
+        'calculator.divide(%p, %p) should throw error',
+        (x, y) => {
+          expect(() => calculator.divide(x, y)).toThrow()
+        }
+      );
 
       test('string not number', () => {
-        expect(() => calculator.subtract('string', 'string2')).toThrow();
+        expect(() => calculator.divide('string', 'string2')).toThrow();
       });
+    });
+
+    describe('division cases', () => {
+      test.each(divisionCases)(
+         'calculator.divide(%p, %p) should return %p',
+         (x, y, expected) => {
+          expect(calculator.divide(x, y)).toBe(expected)
+         }
+      )
     })
   })
 
