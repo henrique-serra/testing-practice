@@ -6,12 +6,19 @@ class Calculator {
     this.errorCases = ['null', 'undefined', 'object', 'array'];
   }
 
+  parseInput(value) {
+    const type = typeof value;
+
+    if(this.errorCases.includes(type)) throw new Error();
+    if(type === 'string') value = Number(value);
+    if((isNaN(value))) throw new Error();
+
+    return value;
+  }
+
   add(x = this.x, y = this.y) {
-    if(this.errorCases.includes(typeof x) || this.errorCases.includes(typeof y)) throw new Error();
-    if(typeof x === 'string') x = Number(x);
-    if(typeof y === 'string') y = Number(y);
-    if(isNaN(x)) throw new Error();
-    if(isNaN(y)) throw new Error();
+    x = this.parseInput(x);
+    y = this.parseInput(y);
     return x + y
   }
 
